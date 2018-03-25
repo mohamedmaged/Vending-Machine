@@ -1,0 +1,29 @@
+library IEEE;
+use ieee.numeric_bit.all;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_arith.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+entity sdet is
+port (
+        ck : in std_logic ;
+        vss : in std_logic ;
+        vdd : in std_logic;
+        i : in std_logic_vector(2 down to 0) ;
+        reset : in std_logic ;
+        o : out std_logic_vector (1 down to 0)
+    ) ;
+end sdet ;
+architecture MOORE of sdet is
+    -- Enumerated Type for states
+    type STATE_TYPE is
+    ( E1, E2, E3,E4,E5,E6) ;
+    -- Signal declaration
+    signal CS : STATE_TYPE;
+    signal NS : STATE_TYPE;
+    begin
+    process ( CS, i, reset ) begin
+        if (reset='1') then
+            NS<=E0;
+        else
+          case CS is
+            

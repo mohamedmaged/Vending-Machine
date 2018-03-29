@@ -1,4 +1,4 @@
-ibrary IEEE;
+library IEEE;
 use ieee.numeric_bit.all;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_arith.ALL;
@@ -35,3 +35,32 @@ dut: sdet PORT MAP (ck, vss, vdd, i, chng,reset,o);
 stim_proc: PROCESS IS
 
 BEGIN
+--reset <= '0' after clk_period, '1' after 20*clk_period;
+i<="000";
+wait for clk_period;
+i<="010";
+wait for clk_period/2;
+assert chng="00"; Report " chnage not equal 0 case1  "  Severity Error; 
+wait for clk_period/2;
+i<="100";
+wait for clk_period/2;
+assert o="01" Report "output not softdrink case 1"
+		Severity Error;
+wait for clk_period/2;
+reset<='1';
+wait for clk_period;
+i<="010";
+wait for clk_period;
+i<="001";
+wait for clk_period/2;
+assert chng="01"; Report "0.25 chnage wasn't refunded  case 2"  Severity Error; 
+wait for clk_period/2;
+i<="011";
+wait for clk_period/2;
+assert o="01" Report "output not juice drink case2"
+		Severity Error;
+wait for clk_period/2;
+WAIT; 
+END PROCESS;
+END ARCHITECTURE test_vending;
+

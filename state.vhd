@@ -35,19 +35,21 @@ architecture Mealy of sdet is
 		when E2=>
 			if (i="010")then NS<=E5; chng<="00"; o<="00";
 			elsif (i="000")then NS<=E4; chng<="00"; o<="00";
-			elsif (i="001")then NS<=E6; chng<="00"; o<="00";
+			elsif (i="001")then NS<=E5; chng<="00"; o<="00";
 			END IF; 
 		when E3=>
 			if(i="000")then NS<=E5; chng<="00"; o<="00";
-			elsif (i="010")then NS<=E5; chng<="11"; o<="00";
-			elsif (i="001")then NS<=E5; chng<="01"; o<="00";
+			elsif (i="010")then NS<=E6; chng<="11"; o<="00";
+			elsif (i="001")then NS<=E6; chng<="01"; o<="00";
 			END IF; 
 		when E4=>
-			if(i="000")then NS<=E6; chng<="00"; o<="00";
+			if(i="000")then NS<=E5; chng<="00"; o<="00";
 			elsif(i="001")then NS<=E3; chng<="00"; o<="00";
-			elsif(i="010")then NS<=E5; chng<="01"; o<="00";
+			elsif(i="010")then NS<=E6; chng<="01"; o<="00";
 			END IF;
 		when E5=>
+			#write statements for state 5 ya migo
+		when E6=>
 			if(i="100")then NS<=E1; chng<="00"; o<="01";
 			elsif (i="011")then NS<=E1; chng<="00"; o<="10";
 			END IF;

@@ -25,7 +25,7 @@ FOR dut: sdet USE ENTITY WORK.sdet ;
 	Signal chng: std_logic_vector (1 downto 0):="00";
         Signal reset : std_logic :='0';
         Signal o :std_logic_vector (1 downto 0):="00";
-constant clk_period :time := 50 ns;
+constant clk_period :time := 1000 ns;
 BEGIN
 
 -- Instantiate the Device Under Test (DUT)

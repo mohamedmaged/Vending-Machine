@@ -21,6 +21,10 @@ architecture Mealy of sdet is
     -- Signal declaration
     signal CS : STATE_TYPE;
     signal NS : STATE_TYPE;
+-- Synthesis directives :
+-- pragma current_state CS
+-- pragma next_state NS
+-- pragma clock ck
     begin
     process ( CS, i, reset ) begin
         if (reset='1') then

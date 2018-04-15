@@ -1,0 +1,8 @@
+# Encoding figure "sdet"
+-sdet o 6
+e6	0	1
+e5	1	2
+e4	2	4
+e3	3	8
+e2	4	10
+e1	5	20

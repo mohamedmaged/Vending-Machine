@@ -1,10 +1,10 @@
--- VHDL data flow description generated from `statej`
---		date : Sun Apr 15 17:47:07 2018
+-- VHDL data flow description generated from `statem`
+--		date : Sun Apr 15 17:47:19 2018
 
 
 -- Entity Declaration
 
-ENTITY statej IS
+ENTITY statem IS
   PORT (
   ck : in BIT;	-- ck
   vss : in BIT;	-- vss
@@ -14,12 +14,12 @@ ENTITY statej IS
   reset : in BIT;	-- reset
   o : out bit_vector(1 DOWNTO 0) 	-- o
   );
-END statej;
+END statem;
 
 
 -- Architecture Declaration
 
-ARCHITECTURE VBE OF statej IS
+ARCHITECTURE VBE OF statem IS
   SIGNAL sdet_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- sdet_cs
   SIGNAL sdet_cs_e6 : BIT;		-- sdet_cs_e6
   SIGNAL sdet_ns_e6 : BIT;		-- sdet_ns_e6
@@ -36,37 +36,36 @@ ARCHITECTURE VBE OF statej IS
   SIGNAL sdet_ns : BIT_VECTOR(2 DOWNTO 0);	-- sdet_ns
 
 BEGIN
-  sdet_ns(0) <= (sdet_ns_e1 OR sdet_ns_e5 OR sdet_ns_e6);
-  sdet_ns(1) <= (sdet_ns_e1 OR sdet_ns_e2 OR sdet_ns_e4 OR 
-sdet_ns_e5);
-  sdet_ns(2) <= (sdet_ns_e1 OR sdet_ns_e2);
+  sdet_ns(0) <= (sdet_ns_e1 OR sdet_ns_e6);
+  sdet_ns(1) <= (sdet_ns_e1 OR sdet_ns_e2 OR sdet_ns_e4);
+  sdet_ns(2) <= (sdet_ns_e1 OR sdet_ns_e2 OR sdet_ns_e5);
   sdet_ns_e1 <= (sdet_cs_e6 AND ((NOT(i(0)) AND i(2) AND NOT(i(1)
 )) OR (i(0) AND NOT(i(2)) AND i(1))));
   sdet_cs_e1 <= (sdet_cs(2) AND sdet_cs(0));
   sdet_ns_e2 <= (sdet_cs_e1 AND NOT(i(0)) AND NOT(i(2)) AND NOT(
 i(1)));
-  sdet_cs_e2 <= (sdet_cs(2) AND NOT(sdet_cs(0)));
+  sdet_cs_e2 <= (sdet_cs(2) AND sdet_cs(1) AND NOT(sdet_cs(0)));
   sdet_ns_e3 <= ((sdet_cs_e1 AND NOT(i(0)) AND NOT(i(2)) AND i(1)
 ) OR (sdet_cs_e4 AND i(0) AND NOT(i(2)) AND NOT(
 i(1))) OR (sdet_cs_e5 AND NOT(i(0)) AND NOT(i(2)) AND
  NOT(i(1))));
-  sdet_cs_e3 <= (NOT(sdet_cs(1)) AND NOT(sdet_cs(0)));
+  sdet_cs_e3 <= (NOT(sdet_cs(2)) AND NOT(sdet_cs(1)) AND NOT(
+sdet_cs(0)));
   sdet_ns_e4 <= ((sdet_cs_e1 AND i(0) AND NOT(i(2)) AND NOT(i(1))
 ) OR (sdet_cs_e2 AND NOT(i(0)) AND NOT(i(2)) AND 
 NOT(i(1))));
-  sdet_cs_e4 <= (NOT(sdet_cs(2)) AND sdet_cs(1) AND NOT(
-sdet_cs(0)));
+  sdet_cs_e4 <= (NOT(sdet_cs(2)) AND sdet_cs(1));
   sdet_ns_e5 <= ((sdet_cs_e2 AND ((i(0) AND NOT(i(2)) AND NOT(
 i(1))) OR (NOT(i(0)) AND NOT(i(2)) AND i(1)))) OR (
 sdet_cs_e3 AND NOT(i(0)) AND NOT(i(2)) AND NOT(i(1))) OR (
 sdet_cs_e4 AND NOT(i(0)) AND NOT(i(2)) AND NOT(i(1))));
-  sdet_cs_e5 <= (NOT(sdet_cs(2)) AND sdet_cs(1) AND sdet_cs(0));
+  sdet_cs_e5 <= (sdet_cs(2) AND NOT(sdet_cs(1)));
   sdet_ns_e6 <= ((sdet_cs_e3 AND ((i(0) AND NOT(i(2)) AND NOT(
 i(1))) OR (NOT(i(0)) AND NOT(i(2)) AND i(1)))) OR (
 sdet_cs_e4 AND NOT(i(0)) AND NOT(i(2)) AND i(1)) OR (
 sdet_cs_e5 AND ((i(0) AND NOT(i(2)) AND NOT(i(1))) OR (NOT(
 i(0)) AND NOT(i(2)) AND i(1)))));
-  sdet_cs_e6 <= (NOT(sdet_cs(1)) AND sdet_cs(0));
+  sdet_cs_e6 <= (NOT(sdet_cs(2)) AND sdet_cs(0));
   label0 : BLOCK ((NOT((ck'STABLE)) AND ck) = '1')
   BEGIN
     sdet_cs(0) <= GUARDED (sdet_ns(0) OR reset);

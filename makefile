@@ -48,3 +48,20 @@ stateo_b.vst : stateo_b.vbe
 stater_b.vst : stater_b.vbe
 	@echo " Optimizing -r -> $@ "
 	boog -l param stater_b
+loon: statea_b.xsc statej_b.xsc statem_b.xsc stateo_b.xsc stater_b.xsc
+statea_b.xsc : statea_b.vst
+	@echo " Optimizing -a -> $@ "
+	loon statea_b statea_l param
+statej_b.xsc : statej_b.vst
+	@echo " Optimizing -j -> $@ "
+	loon statej_b statej_l param
+statem_b.xsc : statem_b.vst
+	@echo " Optimizing -m -> $@ "
+	loon statem_b statem_l param
+stateo_b.xsc : stateo_b.vst
+	@echo " Optimizing -o -> $@ "
+	loon stateo_b stateo_l param
+stater_b.xsc : stater_b.vst
+	@echo " Optimizing -r -> $@ "
+	loon stater_b stater_l param
+

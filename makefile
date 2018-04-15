@@ -14,6 +14,7 @@ stateo.vbe : state.fsm
 stater.vbe : state.fsm
 	@echo " Encoding -r -> $@ "
 	syf -CEV -r state.fsm
+
 boom : statea_b.vbe statej_b.vbe statem_b.vbe stateo_b.vbe stater_b.vbe
 statea_b.vbe : statea.vbe
 	@echo " Optimizing -a -> $@ "
@@ -31,5 +32,19 @@ stater_b.vbe : stater.vbe
 	@echo " Optimizing -r -> $@ "
 	boom -V -d 50 stater.vbe stater_b
 
-
-
+boog: statea_b.vst statej_b.vst statem_b.vst stateo_b.vst stater_b.vst
+statea_b.vst : statea_b.vbe
+	@echo " Optimizing -a -> $@ "
+	boog -l param statea_b
+statej_b.vst : statej_b.vbe
+	@echo " Optimizing -j -> $@ "
+	boog -l param statej_b
+statem_b.vst : statem_b.vbe
+	@echo " Optimizing -m -> $@ "
+	boog -l param statem_b
+stateo_b.vst : stateo_b.vbe
+	@echo " Optimizing -o -> $@ "
+	boog -l param stateo_b
+stater_b.vst : stater_b.vbe
+	@echo " Optimizing -r -> $@ "
+	boog -l param stater_b

@@ -1,0 +1,70 @@
+-- VHDL data flow description generated from `statea_b`
+--		date : Sun Apr 15 19:36:43 2018
+
+
+-- Entity Declaration
+
+ENTITY statea_b IS
+  PORT (
+  ck : in BIT;	-- ck
+  vss : in BIT;	-- vss
+  vdd : in BIT;	-- vdd
+  i : in bit_vector(2 DOWNTO 0) ;	-- i
+  chng : out bit_vector(1 DOWNTO 0) ;	-- chng
+  reset : in BIT;	-- reset
+  o : out bit_vector(1 DOWNTO 0) 	-- o
+  );
+END statea_b;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF statea_b IS
+  SIGNAL sdet_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- sdet_cs
+  SIGNAL aux0 : BIT;		-- aux0
+  SIGNAL aux3 : BIT;		-- aux3
+  SIGNAL aux4 : BIT;		-- aux4
+  SIGNAL aux5 : BIT;		-- aux5
+  SIGNAL aux6 : BIT;		-- aux6
+  SIGNAL aux7 : BIT;		-- aux7
+  SIGNAL aux8 : BIT;		-- aux8
+
+BEGIN
+  aux8 <= (NOT(sdet_cs(1)) AND NOT(sdet_cs(0)));
+  aux7 <= (NOT(i(2)) AND NOT(reset));
+  aux6 <= NOT(i(0) AND sdet_cs(2));
+  aux5 <= (i(0) XOR i(1));
+  aux4 <= (NOT(i(0)) AND i(1));
+  aux3 <= (((aux0 AND sdet_cs(2)) AND sdet_cs(0)) AND i(2));
+  aux0 <= (NOT(i(0)) AND NOT(i(1)));
+  label0 : BLOCK ((ck AND NOT((ck'STABLE))) = '1')
+  BEGIN
+    sdet_cs (0) <= GUARDED (((aux5 AND aux8) OR (NOT(i(0)) AND (i(1) XOR 
+sdet_cs(2)) AND sdet_cs(1))) AND aux7);
+  END BLOCK label0;
+  label1 : BLOCK ((ck AND NOT((ck'STABLE))) = '1')
+  BEGIN
+    sdet_cs (1) <= GUARDED (aux3 OR (((i(0) AND NOT(i(1)) AND sdet_cs(2)) OR
+ sdet_cs(0)) AND (i(1) OR NOT(sdet_cs(2)) OR 
+sdet_cs(1)) AND (NOT(aux6) OR (aux0 AND NOT(sdet_cs(2)))) 
+AND NOT(i(2))) OR reset);
+  END BLOCK label1;
+  label2 : BLOCK ((ck AND NOT((ck'STABLE))) = '1')
+  BEGIN
+    sdet_cs (2) <= GUARDED (aux3 OR (((aux6 AND aux5 AND sdet_cs(1)) OR ((
+i(0) OR sdet_cs(1)) AND i(1) AND sdet_cs(2) AND 
+sdet_cs(0)) OR (((NOT(i(0)) AND NOT(sdet_cs(2))) OR aux5) 
+AND aux8)) AND NOT(i(2))) OR reset);
+  END BLOCK label2;
+
+o (0) <= (aux3 AND NOT(reset));
+
+o (1) <= (i(0) AND i(1) AND sdet_cs(2) AND sdet_cs(0) AND 
+aux7);
+
+chng (0) <= (((aux5 AND sdet_cs(2) AND aux8) OR (aux4 AND NOT
+(sdet_cs(2)) AND sdet_cs(1))) AND aux7);
+
+chng (1) <= (aux4 AND NOT(sdet_cs(1)) AND NOT(sdet_cs(0)) AND
+ aux7);
+END;

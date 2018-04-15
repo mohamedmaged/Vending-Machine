@@ -1,0 +1,145 @@
+-- VHDL data flow description generated from `statea_t`
+--		date : Sun Apr 15 23:53:58 2018
+
+
+-- Entity Declaration
+
+ENTITY statea_t IS
+  PORT (
+  o : out bit_vector(1 DOWNTO 0) ;	-- o
+  reset : in BIT;	-- reset
+  chng : out bit_vector(1 DOWNTO 0) ;	-- chng
+  i : in bit_vector(2 DOWNTO 0) ;	-- i
+  vdd : in BIT;	-- vdd
+  vss : in BIT;	-- vss
+  ck : in BIT	-- ck
+  );
+END statea_t;
+
+
+-- Architecture Declaration
+
+ARCHITECTURE behaviour_data_flow OF statea_t IS
+  SIGNAL sdet_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- sdet_cs
+  SIGNAL not_aux12 : BIT;		-- not_aux12
+  SIGNAL not_aux11 : BIT;		-- not_aux11
+  SIGNAL not_aux10 : BIT;		-- not_aux10
+  SIGNAL inv_x2_sig : BIT;		-- inv_x2_sig
+  SIGNAL not_aux4 : BIT;		-- not_aux4
+  SIGNAL not_aux2 : BIT;		-- not_aux2
+  SIGNAL not_aux1 : BIT;		-- not_aux1
+  SIGNAL not_aux13 : BIT;		-- not_aux13
+  SIGNAL not_aux5 : BIT;		-- not_aux5
+  SIGNAL not_aux0 : BIT;		-- not_aux0
+  SIGNAL not_i : BIT_VECTOR(2 DOWNTO 0);	-- not_i
+  SIGNAL not_reset : BIT;		-- not_reset
+  SIGNAL aux14 : BIT;		-- aux14
+  SIGNAL aux9 : BIT;		-- aux9
+  SIGNAL no2_x1_sig : BIT;		-- no2_x1_sig
+  SIGNAL aux7 : BIT;		-- aux7
+  SIGNAL on12_x1_sig : BIT;		-- on12_x1_sig
+  SIGNAL o4_x2_sig : BIT;		-- o4_x2_sig
+  SIGNAL na3_x1_sig : BIT;		-- na3_x1_sig
+  SIGNAL na3_x1_2_sig : BIT;		-- na3_x1_2_sig
+  SIGNAL no2_x1_3_sig : BIT;		-- no2_x1_3_sig
+  SIGNAL o2_x2_sig : BIT;		-- o2_x2_sig
+  SIGNAL inv_x2_2_sig : BIT;		-- inv_x2_2_sig
+  SIGNAL nao22_x1_sig : BIT;		-- nao22_x1_sig
+  SIGNAL a3_x2_sig : BIT;		-- a3_x2_sig
+  SIGNAL no3_x1_sig : BIT;		-- no3_x1_sig
+  SIGNAL no2_x1_4_sig : BIT;		-- no2_x1_4_sig
+  SIGNAL no3_x1_2_sig : BIT;		-- no3_x1_2_sig
+  SIGNAL no2_x1_2_sig : BIT;		-- no2_x1_2_sig
+  SIGNAL o3_x2_sig : BIT;		-- o3_x2_sig
+  SIGNAL inv_x2_3_sig : BIT;		-- inv_x2_3_sig
+  SIGNAL o2_x2_2_sig : BIT;		-- o2_x2_2_sig
+  SIGNAL nao22_x1_2_sig : BIT;		-- nao22_x1_2_sig
+  SIGNAL o2_x2_3_sig : BIT;		-- o2_x2_3_sig
+  SIGNAL on12_x1_2_sig : BIT;		-- on12_x1_2_sig
+  SIGNAL inv_x2_4_sig : BIT;		-- inv_x2_4_sig
+  SIGNAL no3_x1_3_sig : BIT;		-- no3_x1_3_sig
+  SIGNAL inv_x2_5_sig : BIT;		-- inv_x2_5_sig
+  SIGNAL inv_x2_6_sig : BIT;		-- inv_x2_6_sig
+  SIGNAL nao22_x1_3_sig : BIT;		-- nao22_x1_3_sig
+  SIGNAL oa2a2a23_x2_sig : BIT;		-- oa2a2a23_x2_sig
+  SIGNAL na4_x1_sig : BIT;		-- na4_x1_sig
+  SIGNAL inv_x2_7_sig : BIT;		-- inv_x2_7_sig
+  SIGNAL na3_x1_3_sig : BIT;		-- na3_x1_3_sig
+  SIGNAL mbk_buf_not_aux1 : BIT;		-- mbk_buf_not_aux1
+  SIGNAL mbk_buf_not_aux2 : BIT;		-- mbk_buf_not_aux2
+
+BEGIN
+  mbk_buf_not_aux2 <= not_aux2;
+  mbk_buf_not_aux1 <= not_aux1;
+  na3_x1_3_sig <= NOT(((inv_x2_7_sig AND sdet_cs(2)) AND aux7));
+  inv_x2_7_sig <= NOT(sdet_cs(0));
+  na4_x1_sig <= NOT((((not_i(1) AND not_i(0)) AND i(2)) AND 
+not_reset));
+  oa2a2a23_x2_sig <= (((nao22_x1_3_sig AND inv_x2_5_sig) OR (
+no3_x1_3_sig AND on12_x1_2_sig)) OR (nao22_x1_2_sig AND 
+o3_x2_sig));
+  nao22_x1_3_sig <= NOT(((aux14 OR i(2)) AND inv_x2_6_sig));
+  inv_x2_6_sig <= NOT(aux9);
+  inv_x2_5_sig <= NOT(not_aux11);
+  no3_x1_3_sig <= NOT(((inv_x2_4_sig OR not_aux12) OR i(2)));
+  inv_x2_4_sig <= NOT(aux14);
+  on12_x1_2_sig <= (NOT(sdet_cs(2)) OR o2_x2_3_sig);
+  o2_x2_3_sig <= (i(0) OR i(1));
+  nao22_x1_2_sig <= NOT(((o2_x2_2_sig OR inv_x2_3_sig) AND not_reset)
+);
+  o2_x2_2_sig <= (i(2) OR not_aux5);
+  inv_x2_3_sig <= NOT(sdet_cs(1));
+  o3_x2_sig <= ((not_i(0) OR reset) OR not_aux13);
+  no2_x1_2_sig <= NOT((no3_x1_2_sig OR no3_x1_sig));
+  no3_x1_2_sig <= NOT(((reset OR sdet_cs(0)) OR no2_x1_4_sig));
+  no2_x1_4_sig <= NOT((not_aux10 OR not_aux13));
+  no3_x1_sig <= NOT(((reset OR a3_x2_sig) OR no2_x1_3_sig));
+  a3_x2_sig <= ((nao22_x1_sig AND sdet_cs(2)) AND o2_x2_sig);
+  nao22_x1_sig <= NOT(((i(2) OR not_i(0)) AND inv_x2_2_sig));
+  inv_x2_2_sig <= NOT(aux9);
+  o2_x2_sig <= (not_aux10 OR sdet_cs(1));
+  no2_x1_3_sig <= NOT((na3_x1_2_sig OR sdet_cs(2)));
+  na3_x1_2_sig <= NOT(((not_i(0) AND not_i(1)) AND not_i(2)));
+  na3_x1_sig <= NOT(((o4_x2_sig AND not_aux4) AND on12_x1_sig));
+  o4_x2_sig <= (((i(1) OR i(0)) OR not_aux0) OR not_aux13);
+  on12_x1_sig <= (NOT(aux7) OR sdet_cs(0));
+  aux7 <= (NOT(sdet_cs(1)) AND no2_x1_sig);
+  no2_x1_sig <= NOT((not_aux5 OR not_aux0));
+  aux9 <= NOT(((i(0) OR not_i(2)) OR i(1)));
+  aux14 <= NOT((i(0) AND i(1)));
+  not_reset <= NOT(reset);
+  not_i (0) <= NOT(i(0));
+  not_i (1) <= NOT(i(1));
+  not_i (2) <= NOT(i(2));
+  not_aux0 <= (reset OR i(2));
+  not_aux5 <= NOT((i(0) XOR i(1)));
+  not_aux13 <= NOT((sdet_cs(1) AND sdet_cs(2)));
+  not_aux1 <= (not_i(1) OR not_aux0);
+  not_aux2 <= (i(0) OR not_aux1);
+  not_aux4 <= ((sdet_cs(2) OR inv_x2_sig) OR not_aux2);
+  inv_x2_sig <= NOT(sdet_cs(1));
+  not_aux10 <= (i(1) OR not_i(0));
+  not_aux11 <= NOT((sdet_cs(0) AND sdet_cs(2)));
+  not_aux12 <= (sdet_cs(1) OR sdet_cs(0));
+  label0 : BLOCK (NOT(((ck AND NOT((ck'STABLE))) XOR '1')) = '1')
+  BEGIN
+    sdet_cs (0) <= GUARDED na3_x1_sig;
+  END BLOCK label0;
+  label1 : BLOCK (NOT(((ck AND NOT((ck'STABLE))) XOR '1')) = '1')
+  BEGIN
+    sdet_cs (1) <= GUARDED no2_x1_2_sig;
+  END BLOCK label1;
+  label2 : BLOCK (NOT(((ck AND NOT((ck'STABLE))) XOR '1')) = '1')
+  BEGIN
+    sdet_cs (2) <= GUARDED oa2a2a23_x2_sig;
+  END BLOCK label2;
+
+o (0) <= NOT((not_aux11 OR na4_x1_sig));
+
+o (1) <= NOT(((mbk_buf_not_aux1 OR not_i(0)) OR not_aux11)
+);
+
+chng (0) <= NOT((na3_x1_3_sig AND not_aux4));
+
+chng (1) <= NOT((not_aux12 OR mbk_buf_not_aux2));
+END;

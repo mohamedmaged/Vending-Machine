@@ -48,6 +48,7 @@ stateo_b.vst : stateo_b.vbe
 stater_b.vst : stater_b.vbe
 	@echo " Optimizing -r -> $@ "
 	boog -l param stater_b
+
 loon: statea_b.xsc statej_b.xsc statem_b.xsc stateo_b.xsc stater_b.xsc
 statea_b.xsc : statea_b.vst
 	@echo " Optimizing -a -> $@ "

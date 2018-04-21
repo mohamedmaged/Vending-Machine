@@ -1,5 +1,4 @@
 all : syf boom boog loon
-
 syf : statea.vbe statej.vbe statem.vbe stateo.vbe stater.vbe
 statea.vbe : state.fsm
 	@echo " Encoding -a -> $@ "

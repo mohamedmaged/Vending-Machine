@@ -67,3 +67,10 @@ stater_b.xsc : stater_b.vst
 	@echo " Optimizing -r -> $@ "
 	loon stater_b stater_l param
 
+ac_scapin_registers:
+	cat statea_l.vst | grep sff
+
+%_scan.vst : %.al scan.path
+	@echo " scan-path insertion -> $@ "
+	scapin -VRB $* scan $*_scan > scapin.out
+

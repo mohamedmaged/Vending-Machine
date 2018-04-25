@@ -1,5 +1,5 @@
 -- VHDL data flow description generated from `statem_b`
---		date : Sun Apr 15 20:19:51 2018
+--		date : Thu Apr 26 01:39:10 2018
 
 
 -- Entity Declaration
@@ -21,59 +21,55 @@ END statem_b;
 
 ARCHITECTURE behaviour_data_flow OF statem_b IS
   SIGNAL sdet_cs : REG_VECTOR(2 DOWNTO 0) REGISTER;	-- sdet_cs
+  SIGNAL aux0 : BIT;		-- aux0
   SIGNAL aux1 : BIT;		-- aux1
   SIGNAL aux2 : BIT;		-- aux2
+  SIGNAL aux3 : BIT;		-- aux3
   SIGNAL aux4 : BIT;		-- aux4
   SIGNAL aux5 : BIT;		-- aux5
   SIGNAL aux6 : BIT;		-- aux6
   SIGNAL aux7 : BIT;		-- aux7
   SIGNAL aux8 : BIT;		-- aux8
-  SIGNAL aux9 : BIT;		-- aux9
-  SIGNAL aux10 : BIT;		-- aux10
-  SIGNAL aux11 : BIT;		-- aux11
-  SIGNAL aux12 : BIT;		-- aux12
 
 BEGIN
-  aux12 <= NOT(NOT(i(1)) AND NOT(sdet_cs(1)));
-  aux11 <= (NOT(i(2)) AND sdet_cs(2));
-  aux10 <= (NOT(sdet_cs(2)) AND NOT(reset));
-  aux9 <= NOT(NOT(sdet_cs(0)) AND i(0));
-  aux8 <= (NOT(i(0)) AND i(1));
-  aux7 <= (NOT(sdet_cs(0)) AND aux6);
-  aux6 <= (i(0) XOR i(1));
-  aux5 <= (aux4 AND NOT(i(2)));
-  aux4 <= ((sdet_cs(0) AND i(0)) AND i(1));
-  aux2 <= (aux1 AND i(2));
-  aux1 <= ((sdet_cs(0) AND NOT(i(0))) AND NOT(i(1)));
+  aux8 <= (NOT(reset) AND aux7);
+  aux7 <= (NOT(i(2)) AND i(1));
+  aux6 <= (NOT(i(0)) OR sdet_cs(0));
+  aux5 <= (aux1 AND i(2));
+  aux4 <= (sdet_cs(2) OR NOT(sdet_cs(0)));
+  aux3 <= (aux2 AND sdet_cs(0));
+  aux2 <= (i(0) AND NOT(sdet_cs(2)));
+  aux1 <= (aux0 AND sdet_cs(0));
+  aux0 <= (NOT(i(0)) AND NOT(sdet_cs(2)));
   label0 : BLOCK ((NOT((ck'STABLE)) AND ck) = '1')
   BEGIN
-    sdet_cs (0) <= GUARDED ((aux6 AND NOT(sdet_cs(1)) AND aux11) OR ((aux2 
-OR (((NOT(sdet_cs(0) XOR i(0)) AND i(1)) OR (
-sdet_cs(0) AND i(1) AND sdet_cs(1)) OR (NOT(aux9) AND NOT(
-aux12))) AND NOT(i(2)))) AND NOT(sdet_cs(2))) OR reset
-);
+    sdet_cs (0) <= GUARDED (reset OR (((aux6 AND NOT(sdet_cs(2)) AND 
+sdet_cs(1)) OR (NOT(i(0) XOR NOT(aux4)) AND NOT(sdet_cs(1))
+)) AND aux7) OR ((aux5 OR (i(0) AND aux4 AND NOT(
+sdet_cs(1)) AND NOT(i(2)))) AND NOT(i(1))));
   END BLOCK label0;
   label1 : BLOCK ((NOT((ck'STABLE)) AND ck) = '1')
   BEGIN
-    sdet_cs (1) <= GUARDED (((sdet_cs(0) OR sdet_cs(1)) AND aux9 AND NOT(
-i(1)) AND aux11) OR ((aux2 OR aux5) AND NOT(
-sdet_cs(2))) OR reset);
+    sdet_cs (1) <= GUARDED (reset OR (aux3 AND aux7) OR ((aux5 OR ((
+sdet_cs(0) OR sdet_cs(1)) AND aux6 AND sdet_cs(2) AND NOT(
+i(2)))) AND NOT(i(1))));
   END BLOCK label1;
   label2 : BLOCK ((NOT((ck'STABLE)) AND ck) = '1')
   BEGIN
-    sdet_cs (2) <= GUARDED ((((aux7 AND sdet_cs(1)) OR aux1) AND aux11) OR (
-(aux2 OR ((NOT(sdet_cs(0)) OR aux12) AND (aux4 OR 
-(NOT(i(0)) AND NOT(i(1)))) AND NOT(i(2)))) AND NOT
-(sdet_cs(2))) OR reset);
+    sdet_cs (2) <= GUARDED (reset OR (((NOT(i(0)) AND sdet_cs(2) AND NOT(
+sdet_cs(0)) AND sdet_cs(1)) OR aux3) AND aux7) OR ((aux5 OR
+ (((sdet_cs(2) AND sdet_cs(0)) OR (NOT(i(0)) AND 
+NOT(sdet_cs(0))) OR sdet_cs(1)) AND (i(0) XOR (NOT(
+sdet_cs(2)) OR sdet_cs(0))) AND NOT(i(2)))) AND NOT(i(1))));
   END BLOCK label2;
 
-o (0) <= (aux2 AND aux10);
+o (0) <= (aux1 AND NOT(reset) AND i(2) AND NOT(i(1)));
 
-o (1) <= (aux5 AND aux10);
+o (1) <= (aux3 AND aux8);
 
-chng (0) <= (((aux8 AND sdet_cs(1)) OR (aux7 AND NOT(
-sdet_cs(1)))) AND NOT(i(2)) AND aux10);
+chng (0) <= ((aux0 AND (NOT(sdet_cs(0)) OR sdet_cs(1)) AND 
+aux8) OR (aux2 AND NOT(sdet_cs(0)) AND NOT(sdet_cs(1)
+) AND NOT(reset) AND NOT(i(2)) AND NOT(i(1))));
 
-chng (1) <= ((NOT(sdet_cs(0)) OR sdet_cs(2)) AND aux8 AND NOT
-(sdet_cs(1)) AND NOT(i(2)) AND NOT(reset));
+chng (1) <= (NOT(i(0)) AND aux4 AND NOT(sdet_cs(1)) AND aux8);
 END;

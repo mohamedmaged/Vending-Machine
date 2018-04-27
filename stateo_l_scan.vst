@@ -1,16 +1,19 @@
-entity stateo_l is
+entity stateo_l_scan is
    port (
-      ck    : in      bit;
-      vss   : in      bit;
-      vdd   : in      bit;
-      i     : in      bit_vector(2 downto 0);
-      chng  : out     bit_vector(1 downto 0);
-      reset : in      bit;
-      o     : out     bit_vector(1 downto 0)
+      ck      : in      bit;
+      vss     : in      bit;
+      vdd     : in      bit;
+      i       : in      bit_vector(2 downto 0);
+      chng    : out     bit_vector(1 downto 0);
+      reset   : in      bit;
+      o       : out     bit_vector(1 downto 0);
+      scanin  : in      bit;
+      test    : in      bit;
+      scanout : out     bit
  );
-end stateo_l;
+end stateo_l_scan;
 
-architecture structural of stateo_l is
+architecture structural of stateo_l_scan is
 Component a3_x2
    port (
       i0  : in      bit;
@@ -180,6 +183,27 @@ Component ao22_x2
       i0  : in      bit;
       i1  : in      bit;
       i2  : in      bit;
+      q   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component sff2_x4
+   port (
+      ck  : in      bit;
+      cmd : in      bit;
+      i0  : in      bit;
+      i1  : in      bit;
+      q   : out     bit;
+      vdd : in      bit;
+      vss : in      bit
+ );
+end component;
+
+Component buf_x2
+   port (
+      i   : in      bit;
       q   : out     bit;
       vdd : in      bit;
       vss : in      bit
@@ -387,15 +411,6 @@ no2_x1_ins : no2_x1
       vss => vss
    );
 
-sdet_cs_0_ins : sff1_x4
-   port map (
-      ck  => ck,
-      i   => no2_x1_sig,
-      q   => sdet_cs(0),
-      vdd => vdd,
-      vss => vss
-   );
-
 inv_x2_2_ins : inv_x2
    port map (
       i   => sdet_cs(3),
@@ -452,15 +467,6 @@ noa22_x1_ins : noa22_x1
       vss => vss
    );
 
-sdet_cs_1_ins : sff1_x4
-   port map (
-      ck  => ck,
-      i   => noa22_x1_sig,
-      q   => sdet_cs(1),
-      vdd => vdd,
-      vss => vss
-   );
-
 o2_x2_ins : o2_x2
    port map (
       i0  => i(1),
@@ -494,15 +500,6 @@ no3_x1_2_ins : no3_x1
       i1  => no2_x1_3_sig,
       i2  => o2_x2_sig,
       nq  => no3_x1_2_sig,
-      vdd => vdd,
-      vss => vss
-   );
-
-sdet_cs_2_ins : sff1_x4
-   port map (
-      ck  => ck,
-      i   => no3_x1_2_sig,
-      q   => sdet_cs(2),
       vdd => vdd,
       vss => vss
    );
@@ -678,6 +675,47 @@ chng_1_ins : ao22_x2
       i1  => sdet_cs(1),
       i2  => no3_x1_3_sig,
       q   => chng(1),
+      vdd => vdd,
+      vss => vss
+   );
+
+sdet_cs_0_ins_scan_0 : sff2_x4
+   port map (
+      ck  => ck,
+      cmd => test,
+      i0  => no2_x1_sig,
+      i1  => scanin,
+      q   => sdet_cs(0),
+      vdd => vdd,
+      vss => vss
+   );
+
+sdet_cs_1_ins_scan_1 : sff2_x4
+   port map (
+      ck  => ck,
+      cmd => test,
+      i0  => noa22_x1_sig,
+      i1  => sdet_cs(0),
+      q   => sdet_cs(1),
+      vdd => vdd,
+      vss => vss
+   );
+
+sdet_cs_2_ins_scan_2 : sff2_x4
+   port map (
+      ck  => ck,
+      cmd => test,
+      i0  => no3_x1_2_sig,
+      i1  => sdet_cs(1),
+      q   => sdet_cs(2),
+      vdd => vdd,
+      vss => vss
+   );
+
+buf_scan_3 : buf_x2
+   port map (
+      i   => sdet_cs(2),
+      q   => scanout,
       vdd => vdd,
       vss => vss
    );

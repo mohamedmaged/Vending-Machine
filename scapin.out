@@ -21,10 +21,13 @@
                    Contributor(s):             Ilhem Kazi Tani
                    E-mail        : alliance-users@asim.lip6.fr
 
-	--> Parse parameter file /etc/sxlib.scapin
-	### Error unable to find MUX model mx2_x2 !
-	### Error unable to find REG model sff1_x4 !
-	### Error unable to find REG_MUX model sff2_x4 !
-	### Error unable to find BUF model buf_x2 !
+	--> Parse parameter file sxlib.scapin
 	--> Parse path file scan
-	--> Compile Structural file statea_l
+	--> Compile Structural file stateo_l
+	--> Insert Scan Path
+	    > Replace register sdet_cs_0_ins (sff1_x4) by a reg-mux (sff2_x4)
+	    > Replace register sdet_cs_1_ins (sff1_x4) by a reg-mux (sff2_x4)
+	    > Replace register sdet_cs_2_ins (sff1_x4) by a reg-mux (sff2_x4)
+	    Insert a buffer (buf_x2) before the port scanout
+	--> Save Structural file stateo_l_scan
+

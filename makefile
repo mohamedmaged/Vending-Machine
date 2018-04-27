@@ -70,7 +70,7 @@ stater_b.xsc : stater_b.vst
 ac_scapin_registers:
 	cat statea_l.vst | grep sff
 
-%_scan.vst : %.al scan.path
+%_scan.vst : scan.path
 	@echo " scan-path insertion -> $@ "
 	scapin -VRB -P sxlib.scapin $* scan $*_scan > scapin.out
 %_l_flat :

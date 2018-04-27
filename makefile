@@ -73,4 +73,8 @@ ac_scapin_registers:
 %_scan.vst : %.al scan.path
 	@echo " scan-path insertion -> $@ "
 	scapin -VRB -P sxlib.scapin $* scan $*_scan > scapin.out
+%_l_flat :
+	faltbeh $*_l $*_flat
+	proof -d $*_flat $*
+
 

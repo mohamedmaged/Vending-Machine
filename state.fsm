@@ -84,8 +84,6 @@ architecture Mealy of sdet is
 				chng<="00";
 				o<="00";
 			END IF;
-		when others=>assert('1')
-			report"Illegal State";
 	END case;
 END IF;
 END process;

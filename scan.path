@@ -2,6 +2,9 @@ BEGIN_PATH_REG
 sdet_cs_0_ins
 sdet_cs_1_ins
 sdet_cs_2_ins
+sdet_cs_3_ins
+sdet_cs_4_ins
+sdet_cs_5_ins
 END_PATH_REG
 
 BEGIN_CONNECTOR

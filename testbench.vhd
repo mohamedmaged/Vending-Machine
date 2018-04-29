@@ -8,30 +8,49 @@ END ENTITY VendingMachine_test;
 ARCHITECTURE test_vending OF VendingMachine_test IS
 COMPONENT sdet is
 port (
-        ck : in std_logic ;
-        vss : in std_logic ;
-        vdd : in std_logic;
-        i : in std_logic_vector(2 downto 0) ;
-	chng:out std_logic_vector (1 downto 0);
-        reset : in std_logic ;
-        o : out std_logic_vector (1 downto 0)
+        ck : in bit ;
+        vss : in bit ;
+        vdd : in bit;
+        i : in bit_vector(2 downto 0) ;
+	chng:out bit_vector (1 downto 0);
+        reset : in bit ;
+        o : out bit_vector (1 downto 0)
     ) ;
 end COMPONENT ;
+COMPONENT statej_l_scan is
+port (
+      ck      : in      bit;
+      vss     : in      bit;
+      vdd     : in      bit;
+      i       : in      bit_vector(2 downto 0);
+      chng    : out     bit_vector(1 downto 0);
+      reset   : in      bit;
+      o       : out     bit_vector(1 downto 0);
+      scanin  : in      bit;
+      test    : in      bit;
+      scanout : out     bit );
+end COMPONENT;
+
 FOR dut: sdet USE ENTITY WORK.sdet ;
-	Signal ck :  std_logic:='0' ;
-        Signal vss :  std_logic:='0' ;
-        Signal vdd :  std_logic:='1';
-        Signal i : std_logic_vector(2 downto 0) ;
-	Signal chng: std_logic_vector (1 downto 0):="00";
-        Signal reset : std_logic :='0';
-        Signal o :std_logic_vector (1 downto 0):="00";
+FOR dut: statej_l_scan USE ENTITY WORK.statej_l_scan;
+	Signal ck :  bit:='0' ;
+        Signal vss :  bit:='0' ;
+        Signal vdd :  bit:='1';
+        Signal i : bit_vector(2 downto 0) ;
+	Signal chng: bit_vector (1 downto 0):="00";
+        Signal reset : bit :='0';
+	SIGNAL test   	: bit := '0';
+        Signal o :bit_vector (1 downto 0):="00";
+	SIGNAL scanin   : bit := '0';
+	SIGNAL scanout  : bit;
+	constant sequence : bit_vector := "1010001001010100";
 constant clk_period :time := 1000 ns;
 BEGIN
 
 -- Instantiate the Device Under Test (DUT)
 
 dut: sdet PORT MAP (ck, vss, vdd, i, chng,reset,o);
-
+dut: statej_l_scan PORT MAP (ck, vss, vdd, i, chng,reset,o,scanin,test,scanout);
 stim_proc: PROCESS IS
 
 BEGIN
@@ -59,8 +78,8 @@ wait for clk_period/4;
 assert o="01" Report "output not juice drink case2"
 		Severity Error;
 wait for clk_period*3/4;
-i<="000"
-wait for clk-period;
+i<="000";	
+wait for clk_period;
 i<="010";
 reset<='1';
 wait for clk_period;
@@ -76,6 +95,19 @@ i<="011";
 wait for clk_period/4;
 assert o="01" Report "output not juice drink case 3"
 		Severity Error;
+test <= '1';
+	for i In 0 to sequence'length-1 loop
+	wait for clk_period;
+	-- Leave time for the output to stabilize
+	if i>=4 then
+	-- Assert condition
+	Assert scanout=sequence(i-4)
+	Report "scanout does not follow scan in"
+	Severity error;
+	end if;
+	scanin <= sequence(i); -- scanin changes on the next wait
+	statement
+	end loop; 
 WAIT; 
 END PROCESS;
 END ARCHITECTURE test_vending;

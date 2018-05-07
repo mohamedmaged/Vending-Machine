@@ -67,14 +67,18 @@ stater_b.xsc : stater_b.vst
 	@echo " Optimizing -r -> $@ "
 	loon stater_b stater_l param
 
-ac_scapin_registers:
-	cat statea_l.vst | grep sff
+registers:
+	cat state*_l.vst | grep sff
 
 %_scan.vst : scan.path
 	@echo " scan-path insertion -> $@ "
 	scapin -VRB -P sxlib.scapin $* scan $*_scan > scapin.out
+
 %_l_flat :
 	flatbeh $*_l $*_flat
 	proof -d $*_flat $*
 
-
+stateo_p.ap :
+	MBK_IN_LO=vst; export MBK_IN_LO; \
+	MBK_OUT_PH=ap; export MBK_OUT_PH; \
+	alliance-ocp –v –ring –ioc sxlib.scapin stateo_l_scan stateo_p > ocp.out

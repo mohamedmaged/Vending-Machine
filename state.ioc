@@ -1,0 +1,17 @@
+LEFT ( # IOs from bottom to top
+(IOPIN scanin.0 );
+(IOPIN ck.0 );
+(IOPIN chng(0).0 );
+(IOPIN chng(1).0 );  )
+TOP ( # IOs from left to right
+(IOPIN i(0).0 );
+(IOPIN i(1).0 );
+(IOPIN i(2).0 );  )
+RIGHT( # IOs from bottom to top
+(IOPIN test.0 );
+(IOPIN reset.0 );  )
+BOTTOM ( # IOs from left to right
+(IOPIN O(0).0 );
+(IOPIN O(1).0 );
+(IOPIN scanout.0 ); )
+ 

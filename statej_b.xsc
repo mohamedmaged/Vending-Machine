@@ -13,7 +13,7 @@ N:ck:-1:0 ps
 N:i 0:-1:0 ps
 N:i 1:-1:0 ps
 N:i 2:-1:0 ps
-N:na2_x1_2_sig:-1:870 ps
+N:na2_x1_2_sig:-1:868 ps
 N:na2_x1_3_sig:-1:718 ps
 N:na2_x1_4_sig:-1:308 ps
 N:na2_x1_5_sig:-1:484 ps
@@ -36,7 +36,7 @@ N:not_i_0:-1:116 ps
 N:not_i_1:-1:138 ps
 N:not_i_2:-1:136 ps
 N:not_reset:-1:178 ps
-N:not_sdet_cs_0:-1:697 ps
+N:not_sdet_cs_0:-1:695 ps
 N:not_sdet_cs_1:-1:697 ps
 N:not_sdet_cs_2:-1:692 ps
 N:nxr2_x1_sig:-1:910 ps
@@ -46,7 +46,7 @@ N:o3_x2_2_sig:-1:573 ps
 N:o3_x2_sig:-1:571 ps
 N:oa22_x2_2_sig:-1:1443 ps
 N:oa22_x2_sig:-1:1009 ps
-N:oa2ao222_x2_sig:-1:1444 ps
+N:oa2ao222_x2_sig:-1:1442 ps
 N:oa3ao322_x2_sig:-1:1876 ps
 N:on12_x1_sig:-1:537 ps
 N:reset:-1:0 ps
@@ -79,9 +79,9 @@ B:na2_x1_3_ins:32:718 ps
 B:no2_x1_2_ins:-1:293 ps
 B:a2_x2_2_ins:-1:864 ps
 B:no2_x1_ins:-1:293 ps
-B:sdet_cs_0:-1:1458 ps
-B:oa2ao222_x2_ins:-1:1444 ps
-B:na2_x1_2_ins:-1:870 ps
+B:sdet_cs_0:-1:1456 ps
+B:oa2ao222_x2_ins:-1:1442 ps
+B:na2_x1_2_ins:-1:868 ps
 B:na2_x1_ins:-1:484 ps
 B:a2_x2_ins:-1:864 ps
 B:noa22_x1_ins:-1:847 ps
@@ -95,7 +95,7 @@ B:not_i_1:-1:116 ps
 B:not_i_2:-1:116 ps
 B:not_sdet_cs_0:-1:661 ps
 B:not_sdet_cs_1:-1:679 ps
-B:not_aux0_ins:-1:1016 ps
+B:not_aux0_ins:-1:1014 ps
 B:not_sdet_cs_2:-1:692 ps
 B:not_aux5_ins:-1:173 ps
 B:not_aux2_ins:-1:357 ps

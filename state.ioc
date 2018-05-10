@@ -11,7 +11,7 @@ RIGHT( # IOs from bottom to top
 (IOPIN test.0 );
 (IOPIN reset.0 );  )
 BOTTOM ( # IOs from left to right
-(IOPIN O(0).0 );
-(IOPIN O(1).0 );
+(IOPIN o(0).0 );
+(IOPIN o(1).0 );
 (IOPIN scanout.0 ); )
  

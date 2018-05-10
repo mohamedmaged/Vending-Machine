@@ -1,0 +1,23 @@
+LEFT( 
+(IOPIN i(0).0);
+(IOPIN i(1).0);
+(IOPIN i(2).0);
+)
+TOP(
+(IOPIN test.0);
+(IOPIN reset.0);
+(IOPIN ck.0);
+(IOPIN scanin.0);
+)
+RIGHT(
+(IOPIN o(0).0);
+(IOPIN o(1).0);
+)
+BOTTOM(
+(IOPIN chng(0).0);
+(IOPIN chng(1).0);
+(IOPIN scanout.0);
+)
+
+
+

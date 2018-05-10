@@ -1,4 +1,4 @@
-all : syf boom boog loon
+all : syf boom boog loon scan
 syf : statea.vbe statej.vbe statem.vbe stateo.vbe stater.vbe
 statea.vbe : state.fsm
 	@echo " Encoding -a -> $@ "
@@ -70,9 +70,10 @@ stater_b.xsc : stater_b.vst
 registers:
 	cat state*_l.vst | grep sff
 
-%_scan.vst : scan.path
+scan : scano.path scanj.path
 	@echo " scan-path insertion -> $@ "
-	scapin -VRB -P sxlib.scapin $* scan $*_scan > scapin.out
+	scapin -VRB stateo_l scano stateo_l_scan > scapino.out
+	scapin -VRB statej_l scanj statej_l_scan > scapinj.out
 
 %_l_flat :
 	flatbeh $*_l $*_flat
@@ -81,4 +82,35 @@ registers:
 stateo_p.ap :
 	MBK_IN_LO=vst; export MBK_IN_LO; \
 	MBK_OUT_PH=ap; export MBK_OUT_PH; \
-	alliance-ocp –v –ring –ioc sxlib.scapin stateo_l_scan stateo_p > ocp.out
+	ocp –v –ring –ioc xx.ioc stateo_l_scan stateo_p   
+statej_p:
+	ocp –v –ring –ioc xx.ioc statej_l_scan statej_p
+
+graal:
+	RDS_TECHNO_NAME=techno/techno-symb.rds; export RDS_TECHNO_NAME; \
+	graal
+stateo_r:
+	nero -V -p stateo_p stateo_l_scan stateo_l_scan
+statej_r:
+	nero -V -p statej_p statej_l_scan statej_l_scan
+cougaro:
+	MBK_OUT_LO=al; export MBK_OUT_LO; \
+	RDS_TECHNO_NAME=./techno/techno-035.rds; export RDS_TECHNO_NAME; \
+	cougar -v stateo_l_scan stateo_c
+	lvx vst al stateo_l_scan stateo_c -f
+druco:
+	RDS_TECHNO_NAME=./techno/techno-symb.rds; export RDS_TECHNO_NAME; \
+	druc stateo_l_scan 
+
+state_chip:
+	RDS_TECHNO_NAME=./techno/techno-035.rds; export RDS_TECHNO_NAME; \
+	RDS_OUT=cif; export RDS_OUT; \
+	s2r -v -r stateo_l_scan > s2r.out
+dreal:
+	RDS_TECHNO_NAME=./techno/techno-035.rds; export RDS_TECHNO_NAME; \
+	dreal -1 stateo_l_scan
+	
+
+
+
+	
